@@ -1,0 +1,29 @@
+POST http://127.0.0.1:8000/api/v1/auth/registro?nombre=cristian&ci=23435
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "Juan",
+    "email": "juan@mail.com",
+    "password": "juan54321"
+}
+
+### autenticacion (LOGIN)
+POST http://127.0.0.1:8000/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "admin@mail.com",
+    "password": "admin54321"
+}
+
+### Perfil
+GET http://127.0.0.1:8000/api/v1/auth/perfil
+Accept: application/json
+Authorization: Bearer 5|2Fmzeuo5xe3qmQfzuZChkqqmCR0mCXTQkjntOzd3
+
+### LOGOUT
+POST http://127.0.0.1:8000/api/v1/auth/salir
+Accept: application/json
+Authorization: Bearer 4|QMbuXy3XtTOa6e6oMhEMDUS0NCVfgvIVrsr20Xsi
