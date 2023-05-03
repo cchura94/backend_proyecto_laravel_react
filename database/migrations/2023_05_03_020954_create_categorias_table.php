@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('personas', function (Blueprint $table) {
-            $table->string("imagen")->after("status")->nullable();
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->id();
+            $table->string("nombre", 30);
+            $table->text("detalle")->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('personas', function (Blueprint $table) {
-            $table->dropColumn("imagen");
-        });
+        Schema::dropIfExists('categorias');
     }
 };
