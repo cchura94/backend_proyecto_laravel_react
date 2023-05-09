@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\UsuarioController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -19,3 +21,14 @@ Route::prefix("v1/auth")->group(function(){
         Route::post("salir", [AuthController::class, "salir"]);
     });
 });
+
+// Endpoint CRUD de Categorias
+Route::get("/categoria", [CategoriaController::class, "index"])->name("categoria_listar");
+Route::post("/categoria", [CategoriaController::class, "store"]);
+Route::get("/categoria/{id}", [CategoriaController::class, "show"]);
+Route::put("/categoria/{id}", [CategoriaController::class, "update"]);
+Route::delete("/categoria/{id}", [CategoriaController::class, "destroy"]);
+
+// Route::apiResource("/categoria", CategoriaController::class);
+
+Route::apiResource("usuario", UsuarioController::class);

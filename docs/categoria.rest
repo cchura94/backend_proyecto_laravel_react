@@ -1,0 +1,32 @@
+GET http://127.0.0.1:8000/api/categoria
+
+### guardar categoria
+
+POST http://127.0.0.1:8000/api/categoria
+Accept: application/json
+Content-Type: application/json
+
+{
+    "nombre": "JUGUETES",
+    "detalle": "Juguetes para niños"
+}
+
+### Mostrar categoria por id
+
+GET http://127.0.0.1:8000/api/categoria/1
+Accept: application/json
+
+### modificar
+PUT http://127.0.0.1:8000/api/categoria/1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "nombre": "Muebles modificado",
+    "detalle": "Detalles de Muebles modificar"
+}
+
+### eliminar categoria por id
+
+DELETE http://127.0.0.1:8000/api/categoria/2
+
