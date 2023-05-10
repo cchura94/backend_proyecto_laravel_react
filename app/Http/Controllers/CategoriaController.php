@@ -53,7 +53,9 @@ class CategoriaController extends Controller
         // buscar por id y mostrar un recurso SQL
         // $categoria = DB::select("select * from categorias where id=?", [$id]);
         // buscar por id y mostrar un recurso SQL
-        $categoria = DB::table("categorias")->find($id);
+        // $categoria = DB::table("categorias")->find($id);
+        $categoria = Categoria::find($id);
+        $categoria->productos;
 
         return response()->json($categoria, 200);
     }

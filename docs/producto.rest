@@ -1,0 +1,16 @@
+GET http://127.0.0.1:8000/api/producto?page=1&limit=5&q=
+Accept: application/json
+
+### Guardar Productos
+
+POST http://127.0.0.1:8000/api/producto
+Accept: application/json
+Content-Type: application/json
+
+{
+    "nombre": "ESCRITORIO GAMER",
+    "precio": 949.97,
+    "stock": 6,
+    "descripcion": "de madera",
+    "categoria_id": 1
+}
