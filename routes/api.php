@@ -24,15 +24,25 @@ Route::prefix("v1/auth")->group(function(){
     });
 });
 
-// Endpoint CRUD de Categorias
-Route::get("/categoria", [CategoriaController::class, "index"])->name("categoria_listar");
-Route::post("/categoria", [CategoriaController::class, "store"]);
-Route::get("/categoria/{id}", [CategoriaController::class, "show"]);
-Route::put("/categoria/{id}", [CategoriaController::class, "update"]);
-Route::delete("/categoria/{id}", [CategoriaController::class, "destroy"]);
 
-// Route::apiResource("/categoria", CategoriaController::class);
+Route::middleware('auth:sanctum')->group(function(){
 
-Route::apiResource("usuario", UsuarioController::class);
-Route::apiResource("producto", ProductoController::class);
+    // Endpoint CRUD de Categorias
+    Route::get("/categoria", [CategoriaController::class, "index"])->name("categoria_listar");
+    Route::post("/categoria", [CategoriaController::class, "store"]);
+    Route::get("/categoria/{id}", [CategoriaController::class, "show"]);
+    Route::put("/categoria/{id}", [CategoriaController::class, "update"]);
+    Route::delete("/categoria/{id}", [CategoriaController::class, "destroy"]);
+    
+    // Route::apiResource("/categoria", CategoriaController::class);
+    
+    Route::apiResource("usuario", UsuarioController::class);
+    Route::apiResource("producto", ProductoController::class);
+
+});
+
+Route::get("/no-autorizado", function(){
+    return response()->json(["mensaje" => "No estas autorizado para ver esta Pagina"]);
+})->name("login");
+
 
