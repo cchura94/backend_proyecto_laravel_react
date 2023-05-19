@@ -26,14 +26,13 @@ Route::prefix("v1/auth")->group(function(){
 
 
 Route::middleware('auth:sanctum')->group(function(){
-
+    
     // Endpoint CRUD de Categorias
     Route::get("/categoria", [CategoriaController::class, "index"])->name("categoria_listar");
     Route::post("/categoria", [CategoriaController::class, "store"]);
     Route::get("/categoria/{id}", [CategoriaController::class, "show"]);
     Route::put("/categoria/{id}", [CategoriaController::class, "update"]);
     Route::delete("/categoria/{id}", [CategoriaController::class, "destroy"]);
-    
     // Route::apiResource("/categoria", CategoriaController::class);
     
     Route::apiResource("usuario", UsuarioController::class);
