@@ -17,7 +17,7 @@ class CategoriaController extends Controller
         // $categorias = DB::select("select * from categorias");
 
         // listar con Query Builder
-        $categorias = DB::table("categorias")->get();
+        $categorias = DB::table("categorias")->orderBy('id', 'desc')->get();
 
         // retornar en formato JSON
         return response()->json($categorias, 200);
