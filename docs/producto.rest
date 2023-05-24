@@ -1,5 +1,6 @@
-GET http://127.0.0.1:8000/api/producto?page=1&limit=5&q=
+GET http://127.0.0.1:8000/api/producto?page=1&limit=15&q=
 Accept: application/json
+Authorization: Bearer 43|FazrNX6nkmHpdumikjaX1pCdq6fxncGTW7V2inBO
 
 ### Guardar Productos
 

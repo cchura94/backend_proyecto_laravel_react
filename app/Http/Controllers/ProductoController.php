@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -53,12 +53,30 @@ class ProductoController extends Controller
         return response()->json(["message" => "Producto registrado."], 201);
     }
 
+    public function actualizarImagen(Request $request, $id)
+    {
+        if($file = $request->file("imagen")) {
+            $direccion_imagen = time() . "-". $file->getClientOriginalName();
+            $file->move("imagenes", $direccion_imagen);
+
+            $direccion_imagen = "imagenes/" . $direccion_imagen;
+
+            $producto = Producto::find($id);
+            $producto->imagen = $direccion_imagen;
+            $producto->update();            
+            return response()->json(["mensaje" => "Imagen Actualizada"]);
+        }
+
+        return response()->json(["mensaje" => "Se requiere Imagen para actualizar"], 422);        
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return response()->json($producto, 200);
     }
 
     /**
@@ -66,7 +84,45 @@ class ProductoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validar
+        $request->validate([
+            "nombre" => "required",
+            "categoria_id" => "required"
+        ]);   
+
+        DB::beginTransaction();
+
+        try {
+            
+            // guardar
+        $prod = Producto::find($id);
+        $prod->nombre =   $request->nombre;
+        $prod->precio =   $request->precio;    
+        $prod->stock =   $request->stock;
+        $prod->descripcion =   $request->descripcion;
+        $prod->categoria_id =   $request->categoria_id;
+
+        if($file = $request->file("imagen")) {
+            $direccion_imagen = time() . "-". $file->getClientOriginalName();
+            $file->move("imagenes", $direccion_imagen);
+
+            $direccion_imagen = "imagenes/" . $direccion_imagen;
+
+            $prod->imagen = $direccion_imagen;
+        }
+        $prod->update(); 
+        
+        // responder
+
+            DB::commit();
+            // all good
+            return response()->json(["mensaje" => "Producto actualizado"], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json(["mensaje" => "Error al actualizar el producto"], 500);
+        }
+
     }
 
     /**
@@ -74,6 +130,10 @@ class ProductoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+
+        $producto->delete();
+
+        return response()->json(["message" => "Producto eliminado"], 200);
     }
 }

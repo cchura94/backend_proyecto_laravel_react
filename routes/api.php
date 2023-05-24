@@ -26,6 +26,9 @@ Route::prefix("v1/auth")->group(function(){
 
 
 Route::middleware('auth:sanctum')->group(function(){
+
+    // actualizar imagen
+    Route::post("/producto/{id}/actualizar-imagen", [ProductoController::class, "actualizarImagen"]);
     
     // Endpoint CRUD de Categorias
     Route::get("/categoria", [CategoriaController::class, "index"])->name("categoria_listar");
