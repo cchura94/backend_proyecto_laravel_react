@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UsuarioController;
 
@@ -40,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function(){
     
     Route::apiResource("usuario", UsuarioController::class);
     Route::apiResource("producto", ProductoController::class);
+    Route::apiResource("pedido", PedidoController::class);
 
 });
 

@@ -15,3 +15,8 @@ Content-Type: application/json
     "descripcion": "de madera",
     "categoria_id": 1
 }
+
+### eliminar
+DELETE http://127.0.0.1:8000/api/producto/5
+Accept: application/json
+Authorization: Bearer 43|FazrNX6nkmHpdumikjaX1pCdq6fxncGTW7V2inBO
