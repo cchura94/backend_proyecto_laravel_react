@@ -45,7 +45,7 @@ class ClienteController extends Controller
         $clie->correo = $request->correo;
         $clie->save();
         // res
-        return response()->json(["mensaje" => "Cliente registrado"], 201);
+        return response()->json(["mensaje" => "Cliente registrado", "cliente" => $clie], 201);
     }
 
     /**
